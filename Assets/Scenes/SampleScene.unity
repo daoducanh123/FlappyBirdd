@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 26172004}
   - component: {fileID: 26172003}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Bird_01
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
