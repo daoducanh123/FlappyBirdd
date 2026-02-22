@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 {
     // ================= Initialize ========================
     public static Player Instance;
+    private GameManager gameManager;
     [SerializeField] protected Sprite[] sprites;
 
     
@@ -30,7 +31,6 @@ public class Player : MonoBehaviour
         {
             Instance = this;
         }
-        DontDestroyOnLoad(gameObject); // nếu chỉ có 1 scene ko cần destroy on load
 
     rb = GetComponent<Rigidbody2D>();
     spriteRenderer = GetComponent<SpriteRenderer>();
@@ -39,8 +39,8 @@ public class Player : MonoBehaviour
 
      void Start()
     {
+        gameManager = GameManager.Instance;
         InvokeRepeating(nameof(AnimationRepeat), 0.15f, 0.15f);
-        
     }
 
     void Update()
@@ -87,6 +87,11 @@ public class Player : MonoBehaviour
     private void Rotation()
     {
         transform.rotation = Quaternion.Euler(0,0, rb.linearVelocity.y * rotationSpeed);
+    }
+
+    public void Die()
+    {
+        gameManager.SetGameOverMenu();
     }
 
 }
