@@ -7,7 +7,7 @@ public class PipeSpawner : MonoBehaviour
     [SerializeField] private GameObject pipePrefab;
     [SerializeField] private float spawnTimeInterval = 2.5f;
     [SerializeField] private float spawnRange = 2.5f;
-    private Obstacles obstaclesScript;
+
 
 
     private void Awake()
@@ -19,7 +19,6 @@ public class PipeSpawner : MonoBehaviour
     {
         player = Player.Instance;
         pipePooling = PipePooling.Instance;
-        obstaclesScript = FindAnyObjectByType<Obstacles>();
         StartCoroutine(SpawnPipe());        
     }
 
@@ -40,11 +39,12 @@ public class PipeSpawner : MonoBehaviour
             // SpawnPipe
             GameObject pipeSpawn = pipePooling.GetPipe();
             pipeSpawn.transform.position = spawnPos;
+            Invoke(nameof(DeactivatePipe), 7f);
         }
     }
 
     private void DeactivatePipe( )
-    {   
+    {
         pipePooling.ReturnPipe(gameObject);
     }
 }

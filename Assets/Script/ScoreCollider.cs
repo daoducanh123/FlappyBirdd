@@ -1,14 +1,9 @@
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 
-public class ScoreCollider: MonoBehaviour
+public class ScoreCollider : MonoBehaviour
 {
-
-    // ================= Initialize ========================
     private GameManager gameManager;
     private Player player;
-    [SerializeField] private float moveSpeed = 4f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,23 +11,12 @@ public class ScoreCollider: MonoBehaviour
         player = Player.Instance;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        MoveToPlayer();
-    }
-
-    private void MoveToPlayer()
-    {
-        transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {
+        if (collision.CompareTag("Player"))
+        {   
+            Debug.Log("Score++");
             gameManager.AddScore(1);
-        }
+        }    
     }
-
 }
